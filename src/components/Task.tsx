@@ -1,4 +1,4 @@
-import React, { ReactEventHandler, useState } from 'react';
+import React, { useEffect, useRef, useState } from 'react';
 import { Todo } from '../model';
 import { ImPencil, ImBin, ImCheckmark } from 'react-icons/im';
 import './styles.css';
@@ -34,6 +34,13 @@ const SingleTask = ({ todos, todo, setTodos, key }: Props) => {
     setEdit(false);
   };
 
+  const inputRef = useRef<HTMLInputElement>(null);
+
+  useEffect(() => {
+    inputRef.current?.focus();
+  }, [edit]);
+
+  console.log('INPUTREF', inputRef);
   return (
     <form
       className='singleTask_container'
@@ -43,17 +50,12 @@ const SingleTask = ({ todos, todo, setTodos, key }: Props) => {
         <input
           value={editTodo}
           onChange={(e) => setEditTodo(e.target.value)}
+          ref={inputRef}
         ></input>
       ) : todo.isDone ? (
-        <s className='singleTask' key={key}>
-          {' '}
-          {todo.todo}{' '}
-        </s>
+        <s className='singleTask'> {todo.todo} </s>
       ) : (
-        <p className='singleTask' key={key}>
-          {' '}
-          {todo.todo}{' '}
-        </p>
+        <p className='singleTask'> {todo.todo} </p>
       )}
 
       <ImPencil
