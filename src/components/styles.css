@@ -1,3 +1,11 @@
+*,
+*:after,
+*:before {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
 .form {
   font-size: 1.5rem;
 }
@@ -11,4 +19,41 @@
   border: none;
   background: #9e3871;
   color: #fff;
+}
+
+/* 
+#################
+## SINGLE TASK ##
+#################
+*/
+
+.singleTask_container {
+  position: relative;
+
+  width: 450px;
+
+  border-radius: 4px;
+  box-shadow: 1px 1px 20px rgb(158, 155, 155);
+
+  margin: 1rem 0;
+  padding: 0.5rem 1rem;
+}
+
+.icon_item {
+  font-size: 1.5rem;
+  position: absolute;
+}
+.pencil {
+  font-size: 1rem;
+  top: -5px;
+  right: -5px;
+}
+.bin {
+  right: 1.5rem;
+  top: 0.5rem;
+}
+
+.chack {
+  right: 4rem;
+  top: 0.5rem;
 }
