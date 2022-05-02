@@ -2,6 +2,8 @@ import React, { useEffect, useRef, useState } from 'react';
 import { Todo } from '../model';
 import { ImPencil, ImBin, ImCheckmark } from 'react-icons/im';
 import './styles.css';
+import { useDispatch } from 'react-redux';
+import { removeTodo } from '../features/listTodo/ListTodo';
 
 interface Props {
   todo: Todo;
@@ -14,7 +16,9 @@ const SingleTask = ({ todos, todo, setTodos, key }: Props) => {
   const [edit, setEdit] = useState(false);
   const [editTodo, setEditTodo] = useState(todo.todo);
 
-  const completeTask = (id: number) => {
+  const dispatch = useDispatch();
+
+  /*   const completeTask = (id: number) => {
     setTodos(
       todos.map((task) =>
         task.id === id ? { ...todo, isDone: !todo.isDone } : task
@@ -40,40 +44,43 @@ const SingleTask = ({ todos, todo, setTodos, key }: Props) => {
     inputRef.current?.focus();
   }, [edit]);
 
-  console.log('INPUTREF', inputRef);
+  console.log('INPUTREF', inputRef); */
   return (
-    <form
-      className='singleTask_container'
-      onSubmit={(e) => editTask(e, todo.id)}
-    >
-      {edit ? (
-        <input
-          value={editTodo}
-          onChange={(e) => setEditTodo(e.target.value)}
-          ref={inputRef}
-        ></input>
-      ) : todo.isDone ? (
-        <s className='singleTask'> {todo.todo} </s>
-      ) : (
-        <p className='singleTask'> {todo.todo} </p>
-      )}
+    <div>
+      <form
+        className='singleTask_container'
+        // onSubmit={(e) => editTask(e, todo.id)}
+      >
+        {edit ? (
+          <input
+            value={editTodo}
+            onChange={(e) => setEditTodo(e.target.value)}
+            // ref={inputRef}
+          ></input>
+        ) : todo.isDone ? (
+          <s className='singleTask'> {todo.todo} </s>
+        ) : (
+          <p className='singleTask'> {todo.todo} </p>
+        )}
 
-      <ImPencil
-        className='icon_item pencil'
-        style={{ color: 'rgb(158, 56, 113)' }}
-        onClick={() => setEdit(!edit)}
-      />
-      <ImCheckmark
-        className='icon_item chack'
-        style={{ color: 'green', fontWeight: 'bold' }}
-        onClick={() => completeTask(todo.id)}
-      />
-      <ImBin
-        className='icon_item bin'
-        style={{ color: 'red' }}
-        onClick={() => deleteTask(todo.id)}
-      />
-    </form>
+        <ImPencil
+          className='icon_item pencil'
+          style={{ color: 'rgb(158, 56, 113)' }}
+          // onClick={() => setEdit(!edit)}
+        />
+        <ImCheckmark
+          className='icon_item chack'
+          style={{ color: 'green', fontWeight: 'bold' }}
+          // onClick={() => completeTask(todo.id)}
+        />
+        <ImBin
+          className='icon_item bin'
+          style={{ color: 'red' }}
+          // onClick={() => deleteTask(todo.id)}
+          onClick={() => dispatch(removeTodo(todo.id))}
+        />
+      </form>
+    </div>
   );
 };
 
