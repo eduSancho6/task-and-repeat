@@ -1,8 +1,8 @@
 import React, { useState } from 'react';
-import './App.css';
-import ListTodo from './components/ListTodo';
-import SearchInput from './components/SearchInput';
-import { Todo } from './model';
+import '../App.css';
+import ListTodo from '../components/ListTodo';
+import TaskMaker from '../components/SearchInput';
+import { Todo } from '../model';
 
 const App: React.FC = () => {
   const [todo, setTodo] = useState<string>('');
@@ -24,7 +24,7 @@ const App: React.FC = () => {
   return (
     <div className='App'>
       <span className='name_app'> Task and Repeat</span>
-      <SearchInput todo={todo} setTodo={setTodo} addTask={addTask} />
+      <TaskMaker todo={todo} setTodo={setTodo} addTask={addTask} />
       <ListTodo todos={todos} setTodos={setTodos} />
     </div>
   );
